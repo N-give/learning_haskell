@@ -115,6 +115,11 @@ maximum' (x:xs)
   | otherwise = maxTail
   where maxTail = maximum' xs
 
+maximum2 :: (Ord a) => [a] -> a
+maximum2 [] = error "maximum of empty list"
+maximum2 [x] = x
+maximum2 (x:xs) = max x (maximum2 xs)
+
 replicate' :: (Num i, Ord i) => i -> a -> [a]
 replicate' n x
   | n <= 0 = []
@@ -160,7 +165,7 @@ zipWith' _ _ [] = []
 zipWith' f (x:xs) (y:ys) = f x y : zipWith' f xs ys
 
 flip' :: (a -> b -> c) -> (b -> a -> c)
-flip' f y x= f x y
+flip' f y x = f x y
 
 map' :: (a -> b) -> [a] -> [b]
 map' _ [] = []
@@ -185,4 +190,12 @@ chain n
   | even n = n:chain (div n 2)
   | odd n = n:chain(n*3 + 1)
 
+numLongChains :: Int
+numLongChains = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
+sum2 :: (Num a) => [a] -> a
+sum2 xs = foldl (\acc x -> acc + x) 0 xs
+
+sum3 :: (Num a) => [a] -> a
+sum3 = foldl (+) 0
 
