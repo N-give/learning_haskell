@@ -1,3 +1,11 @@
+-- import Data.List
+-- import Data.List hiding (nub)
+import Data.List (nub, sort)
+import qualified Data.Map as M
+-- import qualified Geometry.Sphere as Sphere
+-- import qualified Geometry.Cuboid as Cuboid
+-- import qualified Geometry.Cube as Cube
+
 doubleMe x = x + x
 
 doubleUs x y = (doubleMe x) + (doubleMe y)
@@ -148,7 +156,7 @@ elem' a (x:xs)
 
 quicksort :: (Ord a) => [a] -> [a]
 quicksort [] = []
-quicksort (x:xs) = 
+quicksort (x:xs) =
   let smallerSorted = quicksort [a | a <- xs, a <= x]
       biggerSorted = quicksort [a | a <- xs, a > x]
    in smallerSorted ++ [x] ++ biggerSorted
@@ -199,3 +207,5 @@ sum2 xs = foldl (\acc x -> acc + x) 0 xs
 sum3 :: (Num a) => [a] -> a
 sum3 = foldl (+) 0
 
+numUniques :: (Eq a) => [a] -> Int
+numUniques = length . nub
