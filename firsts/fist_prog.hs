@@ -1,5 +1,5 @@
-main = do
-  getParts
+main :: IO ()
+main = getParts
 
 getParts :: IO()
 getParts = do
@@ -12,12 +12,16 @@ getParts = do
   print (createEmail recipient title author)
 
 
-createEmail recipient bookTitle author = toPart recipient ++
+createEmail :: String -> String -> String -> String
+createEmail recipient bookTitle author = toPart' recipient ++
   bodyPart bookTitle ++
   fromPart author
 
-toPart recip = "Dear " ++ recip ++ ",\n"
+toPart' :: String -> String
+toPart' part = "Dear " ++ part ++ ",\n"
 
+bodyPart :: String -> String
 bodyPart title = "Thanks for buying " ++ title ++ ".\n"
 
+fromPart :: String -> String
 fromPart author = "Thanks,\n" ++ author
